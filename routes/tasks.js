@@ -1,6 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const Task = require('../models/Task');
+const auth = require('../middleware/auth');
+
+router.use(auth);
+router.get('/', async (req, res) => {
+  try {
+    // Get tasks for authenticated user
+    const tasks = await Task.find({ userId: req.userId });
+    res.json(tasks);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 // Get all tasks
 router.get('/', async (req, res) => {
