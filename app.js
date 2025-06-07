@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger/swagger.json');
 const taskRoutes = require('./routes/tasks');
+const authRoutes = require('./routes/auth');
 
 const app = express();
 app.use(express.json());
@@ -15,8 +16,10 @@ mongoose.connect('mongodb://localhost:27017/taskmanager')
 // Swagger and Routes (keep existing code)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/tasks', taskRoutes);
+app.use('/auth', authRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+  console.log(`Swagger UI is available at http://localhost:${PORT}/api-docs`);
 });
