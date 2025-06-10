@@ -24,6 +24,11 @@ require('dotenv').config();
 const app = express();
 app.use(express.json());
 
+app.use('/auth', authRoutes);
+app.get('/test-route', (req, res) => {
+  res.send('Route test successful!');
+});
+
 // Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/taskmanager')
   .then(() => console.log('Connected to MongoDB!'))
