@@ -6,20 +6,6 @@ const taskRoutes = require('./routes/tasks');
 const authRoutes = require('./routes/auth');
 require('dotenv').config();
 
-// const rateLimit = require('express-rate-limit');
-
-// const limiter = rateLimit({
-//   windowMs: 15 * 60 * 1000, // 15 minutes
-//   max: 100 // limit each IP to 100 requests per windowMs
-// });
-
-// app.use(limiter);
-// const cors = require('cors');
-
-// app.use(cors({
-//   origin: process.env.CLIENT_URL || 'http://localhost:3001',
-//   methods: ['GET', 'POST', 'PUT', 'DELETE']
-// }));
 
 const app = express();
 app.use(express.json());
@@ -33,11 +19,6 @@ app.get('/test-route', (req, res) => {
 mongoose.connect('mongodb://localhost:27017/taskmanager')
   .then(() => console.log('Connected to MongoDB!'))
   .catch(err => console.error('MongoDB connection error:', err));
-
-// // Swagger and Routes (keep existing code)
-// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-// app.use('/tasks', taskRoutes);
-// app.use('/auth', authRoutes);
 
 // Serve Swagger JSON
 app.get('/api-docs.json', (req, res) => {
