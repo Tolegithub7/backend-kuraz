@@ -1,0 +1,1 @@
+process.env.GEMINI_API_KEY = 'AIzaSyAeJ3Bhk2X715U3-LfSPJXyMHOi-SRQwGY';
