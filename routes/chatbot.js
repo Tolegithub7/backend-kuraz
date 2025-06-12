@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const geminiService = require('../services/gemini');
 const auth = require('../middleware/auth');
+const validateChatInput = require('../middleware/validateChatInput');
 
-router.post('/ask', auth, async (req, res) => {
+router.post('/ask', auth, validateChatInput, async (req, res) => {
   try {
     const { message } = req.body;
     
