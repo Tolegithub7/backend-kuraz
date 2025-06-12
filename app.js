@@ -5,6 +5,7 @@ const swaggerDocument = require('./swagger/swagger.json');
 const taskRoutes = require('./routes/tasks');
 const authRoutes = require('./routes/auth');
 require('dotenv').config();
+const chatbotRoutes = require('./routes/chatbot');
 
 
 const app = express();
@@ -14,6 +15,7 @@ app.use('/auth', authRoutes);
 app.get('/test-route', (req, res) => {
   res.send('Route test successful!');
 });
+app.use('/chatbot', chatbotRoutes);
 
 // Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/taskmanager')
