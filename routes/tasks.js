@@ -24,9 +24,9 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const tasks = await Task.find({ userId: req.userId });
-    res.send(tasks);
+    res.json(tasks);
   } catch (err) {
-    res.status(500).send(err.message);
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -37,14 +37,10 @@ router.get('/:id', async (req, res) => {
       _id: req.params.id, 
       userId: req.userId 
     });
-    
-    if (!task) {
-      return res.status(404).send();
-    }
-    
-    res.send(task);
+    if (!task) return res.status(404).json({ error: 'Task not found' });
+    res.json(task);
   } catch (err) {
-    res.status(500).send(err.message);
+    res.status(500).json({ error: err.message });
   }
 });
 
